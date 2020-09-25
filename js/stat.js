@@ -52,6 +52,22 @@ const renderGistagramm = (ctx, players, times, maxTime) => {
   }
 };
 
+const renderDataGistagramm = (ctx, players, times, maxTime) => {
+  for (let i = 0; i < players.length; i++) {
+    ctx.fillText(
+        players[i],
+        CLOUD_X + GORIZONTAL_MARGIN + (SCALE_WIDTH + GORIZONTAL_MARGIN) * i,
+        CLOUD_Y + TEXT_INIT_Y
+    );
+
+    ctx.fillText(
+        Math.round(times[i]),
+        CLOUD_X + GORIZONTAL_MARGIN + (SCALE_WIDTH + GORIZONTAL_MARGIN) * i,
+        CLOUD_HEIGHT - (HEIGHT_GISTAGRAMM * times[i]) / maxTime - TEXT_HEIGHT - GAP
+    );
+  }
+};
+
 window.renderStatistics = (ctx, players, times) => {
   renderCloud(
       ctx,
@@ -87,18 +103,6 @@ window.renderStatistics = (ctx, players, times) => {
 
   let maxTime = getMaxElement(times);
 
-  for (let i = 0; i < players.length; i++) {
-    ctx.fillText(
-        players[i],
-        CLOUD_X + GORIZONTAL_MARGIN + (SCALE_WIDTH + GORIZONTAL_MARGIN) * i,
-        CLOUD_Y + TEXT_INIT_Y
-    );
-
-    ctx.fillText(
-        Math.round(times[i]),
-        CLOUD_X + GORIZONTAL_MARGIN + (SCALE_WIDTH + GORIZONTAL_MARGIN) * i,
-        CLOUD_HEIGHT - (HEIGHT_GISTAGRAMM * times[i]) / maxTime - TEXT_HEIGHT - GAP
-    );
-  }
+  renderDataGistagramm(ctx, players, times, maxTime);
   renderGistagramm(ctx, players, times, maxTime);
 };
