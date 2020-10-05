@@ -9,6 +9,8 @@
 
   const MIN_NAME_LENGTH = 2;
   const MAX_NAME_LENGTH = 25;
+  const POSITION_POPUP_X = `50%`;
+  const POSITION_POPUP_Y = `80px`;
 
   const onPopupEscPress = (evt) => {
     if (evt.key === `Escape`) {
@@ -108,5 +110,12 @@
 
     document.addEventListener(`mousemove`, onMouseMove);
     document.addEventListener(`mouseup`, onMouseUp);
+
+    const restartPositionPopup = () => {
+      setup.style.top = POSITION_POPUP_Y;
+      setup.style.left = POSITION_POPUP_X;
+    };
+
+    setupOpen.addEventListener(`click`, restartPositionPopup);
   });
 })();
