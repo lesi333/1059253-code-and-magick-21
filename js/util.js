@@ -3,28 +3,6 @@
 (() => {
   window.util = {
     mags: {
-      WIZARD_NAMES: [
-        `Иван`,
-        `Хуан Себастьян`,
-        `Мария`,
-        `Кристоф`,
-        `Виктор`,
-        `Юлия`,
-        `Люпита`,
-        `Вашингтон`
-      ],
-
-      WIZARD_SURNAMES: [
-        `да Марья`,
-        `Верон`,
-        `Мирабелла`,
-        `Вальц`,
-        `Онопко`,
-        `Топольницкая`,
-        `Нионго`,
-        `Ирвинг`
-      ],
-
       WIZARD_COAT_COLORS: [
         `rgb(101, 137, 164)`,
         `rgb(241, 43, 107)`,
@@ -52,6 +30,7 @@
 
       WIZARD_NUMBERS: 4
     },
+
     getRandomElement: (arr) => {
       return arr[Math.floor(Math.random() * arr.length)];
     },
@@ -66,6 +45,19 @@
       }
 
       return maxElement;
+    },
+
+    onShowError: (errorMessage) => {
+      const node = document.createElement(`div`);
+
+      node.style = `z-index: 100; margin: 0 auto; text-align: center; background-color: red;`;
+      node.style.position = `absolute`;
+      node.style.left = 0;
+      node.style.right = 0;
+      node.style.fontSize = `30px`;
+
+      node.textContent = errorMessage;
+      document.body.insertAdjacentElement(`afterbegin`, node);
     }
   };
 })();

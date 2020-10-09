@@ -3,32 +3,20 @@
 (() => {
   const setup = document.querySelector(`.setup`);
 
-  const generateWizards = () => {
-    let wizards = [];
-    for (let i = 0; i < window.util.mags.WIZARD_NUMBERS; i++) {
-      wizards[i] = {
-        name: window.util.getRandomElement(window.util.mags.WIZARD_NAMES) + ` ` + window.util.getRandomElement(window.util.mags.WIZARD_SURNAMES),
-        coatColor: window.util.getRandomElement(window.util.mags.WIZARD_COAT_COLORS),
-        eyesColor: window.util.getRandomElement(window.util.mags.WIZARD_EYES_COLORS)
-      };
-    }
-    return wizards;
-  };
-
   const createWizard = (template, wizard) => {
     let wizardElement = template.cloneNode(true);
     wizardElement.querySelector(`.setup-similar-label`).textContent = wizard.name;
-    wizardElement.querySelector(`.wizard-coat`).style.fill = wizard.coatColor;
-    wizardElement.querySelector(`.wizard-eyes`).style.fill = wizard.eyesColor;
+    wizardElement.querySelector(`.wizard-coat`).style.fill = wizard.colorCoat;
+    wizardElement.querySelector(`.wizard-eyes`).style.fill = wizard.colorEyes;
 
     return wizardElement;
   };
 
-  const getSimilarWizards = (wizards) => {
-    let similarListElement = document.querySelector(`.setup-similar-list`);
-    let fragment = document.createDocumentFragment();
-    let similarWizardTemplate = document.querySelector(`#similar-wizard-template`).content.querySelector(`.setup-similar-item`);
-    for (let i = 0; i < wizards.length; i++) {
+  const onSimilarWizardsLoadSuccess = (wizards) => {
+    const similarListElement = document.querySelector(`.setup-similar-list`);
+    const fragment = document.createDocumentFragment();
+    const similarWizardTemplate = document.querySelector(`#similar-wizard-template`).content.querySelector(`.setup-similar-item`);
+    for (let i = 0; i < window.util.mags.WIZARD_NUMBERS; i++) {
       fragment.appendChild(createWizard(similarWizardTemplate, wizards[i]));
     }
 
@@ -36,5 +24,5 @@
     setup.querySelector(`.setup-similar`).classList.remove(`hidden`);
   };
 
-  getSimilarWizards(generateWizards());
+  window.backend.load(onSimilarWizardsLoadSuccess, window.util.onShowError);
 })();
