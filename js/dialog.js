@@ -6,7 +6,6 @@
   const setupClose = setup.querySelector(`.setup-close`);
   const userNameInput = document.querySelector(`.setup-user-name`);
   const formWizard = setup.querySelector(`.setup-wizard-form`);
-  const setupFormButton = formWizard.querySelector(`.setup-submit`);
   const dialogHandle = setup.querySelector(`.upload`);
 
   const MIN_NAME_LENGTH = 2;
