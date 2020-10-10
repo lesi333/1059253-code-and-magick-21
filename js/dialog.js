@@ -5,6 +5,7 @@
   const setupOpen = document.querySelector(`.setup-open`);
   const setupClose = setup.querySelector(`.setup-close`);
   const userNameInput = document.querySelector(`.setup-user-name`);
+  const formWizard = setup.querySelector(`.setup-wizard-form`);
   const dialogHandle = setup.querySelector(`.upload`);
 
   const MIN_NAME_LENGTH = 2;
@@ -64,6 +65,19 @@
   };
 
   userNameInput.addEventListener(`input`, validateUserName);
+
+  const onFormSendSuccess = () => {
+    setup.classList.add(`hidden`);
+  };
+
+  const onFormSendError = (errorMessage) => {
+    window.util.showError(errorMessage);
+  };
+
+  formWizard.addEventListener(`submit`, (evt) => {
+    evt.preventDefault();
+    window.backend.save(new FormData(formWizard), onFormSendSuccess, onFormSendError);
+  });
 
   dialogHandle.addEventListener(`mousedown`, (evt) => {
     evt.preventDefault();
