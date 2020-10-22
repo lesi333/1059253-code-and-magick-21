@@ -9,6 +9,7 @@ module.exports = {
     "./js/dialog.js",
     "./js/wizard.js",
     "./js/debounce.js",
+    "./js/avatar.js",
     "./js/setup.js"
   ],
   output: {
